@@ -7,6 +7,7 @@ categories:
 tags:
 # comments: true
 # draft: true
+math: true
 build:
     list: always    # Change to "never" to hide the page from the list
 ---
@@ -124,31 +125,74 @@ int main(){
 ```c
 62
 ```
+**解析**：  
+先看输入格式：
+* 输入在一行中按照格式“yyyy/mm/dd”（即“年/月/日”）给出日期。
 
+也就是需要在一行中输入三个整数，用 `/` 分割。我们使用 `year` `month` `day` 来作为对应的变量名：
+```c
+int year, month, day;
+scanf("%d/%d/%d", &year, &month, &day);
+```
+* 注意：闰年的判别条件是该年年份能被4整除但不能被100整除、或者能被400整除。闰年的2月有29天。 
+
+这主要告诉我们如何判断闰年，但不影响输入。所以我们需要一个整型变量 `isBigYear` 来储存是否是闰年的判断：
+```c
+int isBigYear = 0;
+if((year % 4 == 0 && year % 100 != 0) || year % 400 == 0){
+    isBigYear = 1;
+}
+```
+
+再看题目要求，来确定我们要如何处理得到的日期：
+* 编写程序计算某年某月某日是该年中的**第几天**。
+  
+这明确了我们程序的目的就是计算天数：从当年的1月1日起到指定日期，经过了多少天。所以我们需要一个整型变量 `result` 来储存计算的结果：
+```c
+int result = 0;
+```
+我们知道，月份分为**大月**和**小月**，天数分别是**31天**和**30天**；其中每年的二月是**特殊月**，平年的二月是**28天**，闰年的二月是**29天**。
+
+当月份是**一月**时，经过的天数其实就是输入的 `day`。
+
+当月份不是一月时，我们如何计算大小月的天数呢？由于 C 语言整型除法的特性，其实不需要使用复杂的条件判断，我们只需要用
+$$
+\text{经过的月份数} \times 30 + \left\lfloor \frac{\text{当前月}}{2} \right\rfloor
+$$
+就能得到之前月份的天数了。综上，我们可以用一个简单的式子计算出天数：
+```c
+result = day + (month - 1) * 30 + month / 2;
+```
+
+我们还需要处理二月这个特殊情况。当 `month > 2` 时，由上式计算的天数比实际天数正好多出了**2天或1天**，也就是二月缺少的天数。所以我们只需要在**月份比二月大**的情况下减去多出的这**2天或1天**即可：
+```c
+if(month > 2){
+    result = result - 2 + isBigYear; #减去2天，如果是闰年则加回1天
+}
+```
+
+最后看输出格式：
+* 在一行输出日期是该年中的第几天。
+
+直接输出结果即可：
+```c
+printf("%d", result);
+```
 **完整代码**：
 ```c
 #include <stdio.h>
 int main(){
     int year, month, day, result = 0;
     scanf("%d/%d/%d", &year, &month, &day);
-    int isBigMonth = 1, isBigYear = 0;
+    int isBigYear = 0;
     if((year % 4 == 0 && year % 100 != 0) || year % 400 == 0){
         isBigYear = 1;
     }
-    if(month == 1){
-        printf("%d", day);
-        return 0;
-    }
-    result += month / 2;
+    result = day + (month - 1) * 30 + month / 2;
     if(month > 2){
-        result += (month - 2) * 30;
-        result += 28 + isBigYear;
-    }else{
-        result += 30;
+        result = result - 2 + isBigYear;
     }
-    result += day;
     printf("%d", result);
-    return 0;
 }
 ```
 
