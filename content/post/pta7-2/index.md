@@ -157,9 +157,9 @@ int result = 0;
 
 当月份不是一月时，我们如何计算大小月的天数呢？由于 C 语言整型除法的特性，其实不需要使用复杂的条件判断，我们只需要用
 $$
-\text{经过的月份数} \times 30 + \left\lfloor \frac{\text{当前月}}{2} \right\rfloor
+\text{输入的天数} + \text{经过的月份数} \times 30 + \left\lfloor \frac{\text{当前月}}{2} \right\rfloor
 $$
-就能得到之前月份的天数了。综上，我们可以用一个简单的式子计算出天数：
+就能得到经过的天数了。综上，我们可以用一个简单的式子计算出天数：
 ```c
 result = day + (month - 1) * 30 + month / 2;
 ```
