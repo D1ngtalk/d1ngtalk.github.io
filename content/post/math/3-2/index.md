@@ -12,6 +12,7 @@ math: true
 build:
     list: always    # Change to "never" to hide the page from the list
 ---
+>此文章由 GPT-6 生成，可能会出错，请仔细甄别
 
 这两节非常重要：
 

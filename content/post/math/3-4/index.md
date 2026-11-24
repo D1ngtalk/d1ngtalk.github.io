@@ -12,6 +12,8 @@ math: true
 build:
     list: always    # Change to "never" to hide the page from the list
 ---
+>此文章由 GPT-6 生成，可能会出错，请仔细甄别
+
 这一节是导数的实际应用。前面 §2.2 学习了求导，§2.3 学习了二阶导数，现在开始利用它们研究函数图像的变化。
 
 # **第一部分：做题前必须理解的知识**
