@@ -2,6 +2,7 @@
 title: "高等数学作业 3-4"
 description: 
 date: 2026-11-23T22:55:46+08:00
+slug: math/3-4
 categories:
     - math
 tags:

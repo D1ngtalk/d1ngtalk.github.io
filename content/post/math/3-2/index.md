@@ -2,6 +2,7 @@
 title: "高等数学作业 3-1 3-2"
 description: 
 date: 2026-11-23T11:40:46+08:00
+slug: math/3-2
 categories:
     - math
 tags:

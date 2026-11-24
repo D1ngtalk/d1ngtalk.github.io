@@ -2,6 +2,7 @@
 title: "7-2 二维数组"
 description: 
 date: 2026-11-22T15:07:46+08:00
+slug: pta/7-2
 categories:
     - pta
 tags:
